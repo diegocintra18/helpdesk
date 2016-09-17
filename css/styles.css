@@ -932,9 +932,16 @@ h1.page-header {
 input{
     border-radius: 0 !important;
     border: 2px solid #aaa !important;
-
 }
 input:focus {
+    border: 2px solid #30a5ff !important;
+}
+
+select .form-control{
+    border-radius: 0 !important;
+    border: 2px solid #aaa !important;
+}
+select:focus{
     border: 2px solid #30a5ff !important;
 }
 

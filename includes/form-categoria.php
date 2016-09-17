@@ -26,18 +26,6 @@ endif;
     </div> <!--div class="col-md-3 col-lg-3 form-group "-->
 </form>
 <?php
-//recebendo os dados do form
-/*$data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-if (!empty($data['enviarCat'])):
-    unset($data['enviarCat']);
-
-    //cria novo objeto categoria
-    $cadastra = new AdminCat();
-    //executa a inserção
-    echo '<pre>';
-    var_dump($cadastra);
-    $cadastra->ExeCreate($post);
-endif;*/
 if (isset($_POST['enviarCat'])):
     //envia os dados do formulário para um array
     $post = ['ct_categoria' => $_POST['categoria']];

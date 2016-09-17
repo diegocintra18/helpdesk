@@ -101,6 +101,7 @@ $('#myModal').on('shown.bs.modal', function () {
 <form method="post" action="" >
     <div class="col-md-3 col-lg-3 form-horizontal">
         <div class="formulario">
+            <form
             <fieldset>
                 <legend>Consultar equipamentos</legend>
                 

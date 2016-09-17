@@ -1,6 +1,6 @@
 <div class="col-lg-12">
-    <div class="panel panel-danger">
-        <div class="panel-heading"><strong>Chamados pendentes</strong></div>
+    <div class="panel panel-primary">
+        <div class="panel-heading"><strong>Últimos atendimentos</strong></div>
         <div class="panel-body">
             <table class="table table-hover table-bordered table-condensed">
                 <thead>
@@ -15,27 +15,10 @@
                 </thead>
                 <tbody>
                     <?php
-                    //Mecanismo de paginação
-                    $Atual = filter_input(INPUT_GET, 'atual', FILTER_VALIDATE_INT);
-                    $Pager = new Pager('menu.php?acao=consulta&atual=', 'Primeira', 'Última');
-                    $Pager->ExePager($Atual, 4);
-
-                    $read = new Read;
-                    $read->ExeRead('atendimentos', 'LIMIT :limit OFFSET :offset', "limit={$Pager->getLimit()}&offset={$Pager->getOffset()}");
-
-                    if (!$read->getRowCount()):
-                        $Pager->ReturnPage();
-                        echo 'Não existem resultados!<hr>';
-                    else:
-
-                    endif;
-
-                    $Pager->ExePaginator('atendimentos');
-
                     //cria um objeto de consulta
                     $readConsulta = new Read();
                     //executa a consulta
-                    $readConsulta->ExeRead("atendimentos a", "INNER JOIN categorias c on a.categorias_ct_idcategoria = c.ct_idcategoria INNER JOIN usuarios u on a. usuarios_us_idUser  = u.us_idUser");
+                    $readConsulta->ExeRead("atendimentos a", "INNER JOIN categorias c on a.categorias_ct_idcategoria = c.ct_idcategoria INNER JOIN usuarios u on a. usuarios_us_idUser  = u.us_idUser LIMIT 5");
                     //foreach para exibição na tela
                     foreach ($readConsulta->getResult() as $consulta):
 
@@ -45,7 +28,7 @@
                         echo utf8_decode("<td> {$consulta['at_contato']}</td>");
                         echo utf8_decode("<td> {$consulta['at_ocorrencia']}</td>");
                         echo utf8_decode("<td> {$consulta['ct_categoria']} </td>");
-                        echo "<td> {$consulta['us_nome']}</td>";
+                        echo "<td> {$consulta['us_nome']} {$consulta['us_sobrenome']}</td>";
                         echo "</tr>";
 
                     endforeach;
@@ -55,67 +38,65 @@
         </div><!--div class="panel-body"-->
     </div><!--div class="panel panel-danger"-->
 </div><!--div class="col-lg-12"-->
-
-<div class="col-lg-3">
+<?php
+    $Consulta = new Read();
+    $ConsultaTotal = new Read();
+    //executa a consulta
+    //$Consulta->ExeRead("atendimentos a", "INNER JOIN categorias c on a.categorias_ct_idcategoria = c.ct_idcategoria INNER JOIN usuarios u on a. usuarios_us_idUser  = u.us_idUser LIMIT 5");
+    //foreach para exibição na tela
+?>
+<div class="col-lg-4">
     <div class="panel panel-primary">
-        <div class="panel-heading">Total de atendimentos</div>
-        <div class="panel-body">
-            Atendimentos Fulano:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                    60%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
-            Atendimentos Beltrano:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-                    20%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
-            Atendimentos x:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                    10%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
-            Atendimentos z:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                    10%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
+        <div class="panel-heading">Aten. por técnico</div>
+        <div class="panel-body">            
+            <?php               
+                $ConsultaUser = new Read();
+                $ConsultaUser->ExeRead("usuarios");
+                foreach($ConsultaUser->getResult() as $user){
+                    
+                    $Consulta->ExeRead("atendimentos", "where usuarios_us_idUser = {$user['us_idUser']}");
+                    
+                    $ConsultaTotal->ExeRead("atendimentos");
+                    $a = $ConsultaTotal->getRowCount();
+                    $b = $Consulta->getRowCount();
+                    $c = ($b * 100) / $a;                    
+                    echo $user['us_nome'] . " " . $user['us_sobrenome'];
+                    echo ": <b>" . $b . "</b>";
+                    echo '<div class="progress">' ;
+                    echo "<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"20\" aria-valuemin=\"0\" aria-valuemax=\"400\" style=\"width:" . $c . "%\">";
+                    echo round($c, 2) . "%";
+                    echo '</div><!--div class="progress-bar"-->';
+                    echo '</div><!--div class="progress"-->';
+                }
+            ?>     
         </div><!--div class="panel-body"-->
     </div><!--div class="panel panel-primary"-->
 </div><!--div class="col-lg-3"-->
 
-<div class="col-lg-3">
-    <div class="panel panel-primary ">
-        <div class="panel-heading">Total de atendimentos por categoria</div>
-        <div class="panel-body">
-            Impressora:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                    60%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
-            Rede:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-                    20%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
-            Sistema:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                    10%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
-            Formatação:
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
-                    10%
-                </div><!--div class="progress-bar"-->
-            </div><!--div class="progress"-->
+<div class="col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Aten. por categoria</div>
+        <div class="panel-body">            
+            <?php               
+                $ConsultaCat = new Read();
+                $ConsultaCat->ExeRead("categorias");
+                foreach($ConsultaCat->getResult() as $cat){
+                    
+                    $Consulta->ExeRead("atendimentos", "where categorias_ct_idcategoria = {$cat['ct_idcategoria']}");
+                    
+                    $ConsultaTotal->ExeRead("atendimentos");
+                    $a = $ConsultaTotal->getRowCount();
+                    $b = $Consulta->getRowCount();
+                    $c = ($b * 100) / $a;                    
+                    echo $cat['ct_categoria'];
+                    echo ": <b>" . $b . "</b>";
+                    echo '<div class="progress">' ;
+                    echo "<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"20\" aria-valuemin=\"0\" aria-valuemax=\"400\" style=\"width:" . $c . "%\">";
+                    echo round($c, 2) . "%";
+                    echo '</div><!--div class="progress-bar"-->';
+                    echo '</div><!--div class="progress"-->';
+                }
+            ?>     
         </div><!--div class="panel-body"-->
     </div><!--div class="panel panel-primary"-->
 </div><!--div class="col-lg-3"-->
