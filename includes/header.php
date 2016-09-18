@@ -64,8 +64,6 @@
 			<li><a href="?acao=consulta"> <i class="fa fa-search" aria-hidden="true"></i> Consultar atendimentos</a></li>
 			<li><a href="?acao=cad-usuario"> <i class="fa fa-user-plus" aria-hidden="true"></i> Cadastrar usuários</a></li>
 			<li><a href="?acao=con-usuario"> <i class="fa fa-users" aria-hidden="true"></i> Consultar usuários</a></li>
-			<li><a href="?acao=categoria"> <i class="fa fa-tags" aria-hidden="true"></i> Cadastrar categorias</a></li>
-			<li><a href="?acao=categoria"> <i class="fa fa-search" aria-hidden="true"></i> Consultar categorias</a></li>
 			<li><a href="?acao=cadastrar-equipamento"> <i class="fa fa-hdd-o" aria-hidden="true"></i> Cadastrar equipamentos</a></li>
 			<li><a href="?acao=consultar-equipamento"> <i class="fa fa-search" aria-hidden="true"></i> Consultar equipamentos</a></li>
 			<li role="presentation" class="divider"></li>

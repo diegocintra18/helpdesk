@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header bg-info">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title">Adicionar tipo de equipamento</h3>
+                Adicionar tipo de equipamento
             </div>
             <div class="modal-body">
                 <form method="post" action="" >
@@ -19,13 +19,14 @@
                             />  
                     </div> <!--div class="form-group"-->
                     <div class="">
-                        <button type="submit" name="enviarTipo" id="enviarTipo" class="btn btn-primary">Salvar mudanças</button>
+                        <button type="submit" name="enviarTipo" id="enviarTipo" class="btn btn-primary">Salvar</button>
                         <button type="button"  class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
+<!------------------ modal Diagnóstico ----------------------->    
     <?php
     if (isset($_POST['enviarTipo'])):
         //envia os dados do formulário para um array

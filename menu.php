@@ -33,8 +33,6 @@ if (isset($_GET['acao'])) { // verificação do get para incluir uma página
         include("includes/home.php");
     } elseif ($acao == "estatisticas") {
         include("includes/graficos.php");
-    } elseif ($acao == "categoria") {
-        include("includes/form-categoria.php");
     } elseif ($acao == "consulta") {
         include("includes/consulta.php");
     } elseif ($acao == "con-usuario") {
@@ -56,7 +54,7 @@ if (isset($_GET['acao'])) { // verificação do get para incluir uma página
     } elseif ($acao == 'excluir-atendimento') {
         $id = $_GET['id'];
         $excluir = new Delete();
-        $excluir->ExeDelete('atendimento', "WHERE idAtendimento = :idAtendimento", "idAtendimento={$id}");
+        $excluir->ExeDelete('atendimentos', "WHERE idAtendimento = :idAtendimento", "idAtendimento={$id}");
         include("includes/consulta.php");
     } elseif ($acao == 'excluir-usuario') {
         $id = $_GET['id'];
