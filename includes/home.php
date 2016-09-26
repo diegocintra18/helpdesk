@@ -57,7 +57,7 @@ $ConsultaTotal = new Read();
 </div>
 <div class="col-lg-4">
     <div class="panel panel-blue">
-        <div class="panel-heading">Aten. por técnico</div>
+        <div class="panel-heading">Atendimentos por técnico</div>
         <div class="panel-body">            
             <?php
             $ConsultaUser = new Read();
@@ -82,7 +82,7 @@ $ConsultaTotal = new Read();
 
 <div class="col-lg-4">
     <div class="panel panel-teal">
-        <div class="panel-heading">Aten. por categoria</div>
+        <div class="panel-heading">Atendimentos por categoria</div>
         <div class="panel-body">            
             <?php
             $ConsultaCat = new Read();
@@ -107,7 +107,7 @@ $ConsultaTotal = new Read();
 
 <div class="col-lg-4">
     <div class="panel panel-orange">
-        <div class="panel-heading">Aten. por setor</div>
+        <div class="panel-heading">Atendimentos por setor</div>
         <div class="panel-body">            
             <?php
             $ConsultaCat = new Read();
@@ -161,10 +161,10 @@ $ConsultaTotal = new Read();
                             datasets: [
                                 {
                                     label: "Dados primários",
-                                    fillColor: "rgba(220,220,220,0.5)",
-                                    strokeColor: "rgba(220,220,220,0.8)",
-                                    highlightFill: "rgba(220,220,220,0.75)",
-                                    highlightStroke: "rgba(220,220,220,1)",
+                                    fillColor: "rgba(120,120,120,0.5)",
+                                    strokeColor: "rgba(120,120,120,0.8)",
+                                    highlightFill: "rgba(120,120,120,0.75)",
+                                    highlightStroke: "rgba(120,120,120,1)",
                                     data: [<?php echo $segunda = $consultaDias->getRowCount(); ?>, 
                                         <?php echo $terça = $consultaDias2->getRowCount(); ?>, 
                                         <?php echo $quarta = $consultaDias3->getRowCount(); ?>, 
